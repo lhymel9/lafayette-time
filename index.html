@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8"/>
+        <script type="text/javascript" src="./node_modules/d3/build/d3.min.js"></script>
+        <script>
+            window.onload = function() {
+                var svgCont = d3.select("body").append("svg")
+                                           .attr("width", 1000)
+                                           .attr("height", 2000);
+                var lineFunction = d3.line()
+                                         .x(function(d) { return d.x })
+                                         .y(function(d) { return d.y; })
+                                         .curve(d3.curveLinear);
+                z07_data = [ { "x": 550, "y": 100},
+                             { "x": 750, "y": 105},
+                             { "x": 770, "y": 90},
+                             { "x": 810, "y": 90}, ]
+                var z_07 = svgCont.append("path")
+                                .attr("d", lineFunction(z07_data))
+                                .attr("stroke-width", 3)
+                                .attr("stroke","black")
+                                .attr("fill", "none");
+            }
+        </script>
+    </head>
+    <body>
+    </body>
+</html>

@@ -1,0 +1,16 @@
+{
+  "name": "laffy",
+  "version": "1.0.0",
+  "description": "Data vizualization for Lafayette Home to Work movement.",
+  "dependencies": {
+    "d3": "^4.11.0",
+    "d3-polygon": "^1.0.3",
+    "d3-shape": "^1.2.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "apptest"
+  },
+  "author": "Layne Hymel",
+  "license": "ISC"
+}
