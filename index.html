@@ -5,6 +5,14 @@
         <script type="text/javascript" src="./node_modules/d3/build/d3.min.js"></script>
         <script>
             window.onload = function() {
+                
+                function mapColors(zipArray, step) {
+                    zipArray.forEach(function(zip) {
+                        var color = "hsl(330, 50%, " + step.toString() + "%)";
+                        zip.style("fill", color);
+                    });
+                }
+
                 var svgCont = d3.select("body").append("svg")
                                            .attr("width", 1000)
                                            .attr("height", 2000);
@@ -183,42 +191,45 @@
 
                                 z_07.attr("stroke-width", 2)
                                     .attr("stroke","black")
-                                    .attr("fill", "yellow");
 
                 var z_01 = svgCont.append("path")
                                 .attr("d", lineFunction(z01_data));
 
                                 z_01.attr("stroke-width", 2)
                                     .attr("stroke","black")
-                                    .attr("fill","purple");
 
                 var z_08 = svgCont.append("path")
                                 .attr("d", lineFunction(z08_data));
 
                                 z_08.attr("stroke-width", 2)
                                     .attr("stroke","black")
-                                    .attr("fill","green");
 
                 var z_03 = svgCont.append("path")
                                 .attr("d", lineFunction(z03_data));
 
                                 z_03.attr("stroke-width", 2)
                                     .attr("stroke","black")
-                                    .attr("fill","red");
 
                 var z_06 = svgCont.append("path")
                                 .attr("d", lineFunction(z06_data));
 
                                 z_06.attr("stroke-width", 2)
                                     .attr("stroke","black")
-                                    .attr("fill","blue");
 
                 var z_83 = svgCont.append("path")
                                 .attr("d", lineFunction(z83_data));
 
                                 z_83.attr("stroke-width", 2)
                                     .attr("stroke","black")
-                                    .attr("fill","cyan");
+
+                let perc = 1;
+                my_arr = [z_07,z_01,z_08,z_03,z_06,z_83]             
+                while (perc < 100) {
+                    setTimeout(function() {
+                        mapColors(my_arr, perc);
+                    },1000);
+                    perc++;
+                }
             }
         </script>
     </head>
