@@ -5,13 +5,6 @@
         <script type="text/javascript" src="./node_modules/d3/build/d3.min.js"></script>
         <script>
             window.onload = function() {
-                
-                function mapColors(zipArray, step) {
-                    zipArray.forEach(function(zip) {
-                        var color = "hsl(330, 50%, " + step.toString() + "%)";
-                        zip.style("fill", color);
-                    });
-                }
 
                 var svgCont = d3.select("body").append("svg")
                                            .attr("width", 1000)
@@ -22,61 +15,61 @@
                                          .curve(d3.curveLinear);
 
                 var z07_data = [ { "x": 450, "y": 100},
-                             { "x": 450, "y": 110},
-                             { "x": 400, "y": 130},
-                             { "x": 400, "y": 140},
-                             { "x": 410, "y": 160},
-                             { "x": 410, "y": 185},
-                             { "x": 390, "y": 210},
-                             { "x": 390, "y": 240},
-                             { "x": 410, "y": 255},
-                             { "x": 410, "y": 265},
-                             { "x": 700, "y": 175}, //bottom-right of 70507
-                             { "x": 700, "y": 165},
-                             { "x": 730, "y": 135},
-                             { "x": 730, "y": 100},
-                             { "x": 700, "y": 100},
-                             { "x": 690, "y": 135},
-                             { "x": 670, "y": 135},
-                             { "x": 670, "y": 125},
-                             { "x": 675, "y": 125},
-                             { "x": 675, "y": 120},
-                             { "x": 670, "y": 120},
-                             { "x": 620, "y": 110},
-                             { "x": 620, "y": 100},
-                             { "x": 580, "y": 100},
-                             { "x": 580, "y": 90},
-                             { "x": 545, "y": 90},
-                             { "x": 545, "y": 100},
-                             { "x": 450, "y": 100}, ],
+                                 { "x": 450, "y": 110},
+                                 { "x": 400, "y": 130},
+                                 { "x": 400, "y": 140},
+                                 { "x": 410, "y": 160},
+                                 { "x": 410, "y": 185},
+                                 { "x": 390, "y": 210},
+                                 { "x": 390, "y": 240},
+                                 { "x": 410, "y": 255},
+                                 { "x": 410, "y": 265},
+                                 { "x": 700, "y": 175},
+                                 { "x": 700, "y": 165},
+                                 { "x": 730, "y": 135},
+                                 { "x": 730, "y": 100},
+                                 { "x": 700, "y": 100},
+                                 { "x": 690, "y": 135},
+                                 { "x": 670, "y": 135},
+                                 { "x": 670, "y": 125},
+                                 { "x": 675, "y": 125},
+                                 { "x": 675, "y": 120},
+                                 { "x": 670, "y": 120},
+                                 { "x": 620, "y": 110},
+                                 { "x": 620, "y": 100},
+                                 { "x": 580, "y": 100},
+                                 { "x": 580, "y": 90},
+                                 { "x": 545, "y": 90},
+                                 { "x": 545, "y": 100},
+                                 { "x": 450, "y": 100}, ],
                 
                      z01_data = [ {"x": 700, "y": 175 }, 
-                             {"x": 705, "y": 210 },
-                             {"x": 702, "y": 250 },
-                             {"x": 730, "y": 290 },
-                             {"x": 730, "y": 295 },
-                             {"x": 680, "y": 295 },
-                             {"x": 680, "y": 315 },
-                             {"x": 690, "y": 320 },
-                             {"x": 700, "y": 320 },
-                             {"x": 700, "y": 330 },
-                             {"x": 685, "y": 330 },
-                             {"x": 685, "y": 340 },
-                             {"x": 715, "y": 350 },
-                             {"x": 720, "y": 360 },
-                             {"x": 720, "y": 375 },
-                             {"x": 725, "y": 375 },
-                             {"x": 725, "y": 380 },
-                             {"x": 685, "y": 380 },
-                             {"x": 665, "y": 370 },
-                             {"x": 640, "y": 380 },
-                             {"x": 550, "y": 330 },
-                             {"x": 530, "y": 310 },
-                             {"x": 525, "y": 300 },
-                             {"x": 520, "y": 280 },
-                             {"x": 515, "y": 270 },
-                             {"x": 500, "y": 238 },
-                             { "x": 700, "y": 175}, ],
+                                  {"x": 705, "y": 210 },
+                                  {"x": 702, "y": 250 },
+                                  {"x": 730, "y": 290 },
+                                  {"x": 730, "y": 295 },
+                                  {"x": 680, "y": 295 },
+                                  {"x": 680, "y": 315 },
+                                  {"x": 690, "y": 320 },
+                                  {"x": 700, "y": 320 },
+                                  {"x": 700, "y": 330 },
+                                  {"x": 685, "y": 330 },
+                                  {"x": 685, "y": 340 },
+                                  {"x": 715, "y": 350 },
+                                  {"x": 720, "y": 360 },
+                                  {"x": 720, "y": 375 },
+                                  {"x": 725, "y": 375 },
+                                  {"x": 725, "y": 380 },
+                                  {"x": 685, "y": 380 },
+                                  {"x": 665, "y": 370 },
+                                  {"x": 640, "y": 380 },
+                                  {"x": 550, "y": 330 },
+                                  {"x": 530, "y": 310 },
+                                  {"x": 525, "y": 300 },
+                                  {"x": 520, "y": 280 },
+                                  {"x": 515, "y": 270 },
+                                  {"x": 500, "y": 238 },
+                                  { "x": 700, "y": 175}, ],
 
                      z08_data = [ {"x": 645, "y": 378 },
                                   {"x": 670, "y": 370 },
@@ -114,7 +107,7 @@
                                   {"x": 545, "y": 600 },
                                   {"x": 535, "y": 600 },
                                   {"x": 495, "y": 590 },
-                                  {"x": 470, "y": 570 }, //bottom border point b/t 08 and 03
+                                  {"x": 470, "y": 570 },
                                   {"x": 480, "y": 560 },
                                   {"x": 485, "y": 540 },
                                   {"x": 480, "y": 535 },
@@ -131,7 +124,7 @@
                                   {"x": 430, "y": 550 },
                                   {"x": 420, "y": 530 },
                                   {"x": 425, "y": 510 },
-                                  {"x": 425, "y": 490 }, //06 03 border
+                                  {"x": 425, "y": 490 },
                                   {"x": 435, "y": 455 },
                                   {"x": 455, "y": 415 },
                                   {"x": 460, "y": 400 },
@@ -152,7 +145,7 @@
                                   {"x": 480, "y": 560 },
                                   {"x": 470, "y": 570 }, ],
 
-                     z06_data = [ {"x": 425, "y": 490 }, //06 03 border
+                     z06_data = [ {"x": 425, "y": 490 },
                                   {"x": 435, "y": 455 },
                                   {"x": 455, "y": 415 },
                                   {"x": 460, "y": 400 },
@@ -191,45 +184,61 @@
 
                                 z_07.attr("stroke-width", 2)
                                     .attr("stroke","black")
+                                    .attr("class","07");
 
                 var z_01 = svgCont.append("path")
                                 .attr("d", lineFunction(z01_data));
 
                                 z_01.attr("stroke-width", 2)
                                     .attr("stroke","black")
+                                    .attr("class","01")
 
                 var z_08 = svgCont.append("path")
                                 .attr("d", lineFunction(z08_data));
 
                                 z_08.attr("stroke-width", 2)
                                     .attr("stroke","black")
+                                    .attr("class","08");
 
                 var z_03 = svgCont.append("path")
                                 .attr("d", lineFunction(z03_data));
 
                                 z_03.attr("stroke-width", 2)
                                     .attr("stroke","black")
+                                    .attr("class","03");
 
                 var z_06 = svgCont.append("path")
                                 .attr("d", lineFunction(z06_data));
 
                                 z_06.attr("stroke-width", 2)
                                     .attr("stroke","black")
+                                    .attr("class","06");
 
                 var z_83 = svgCont.append("path")
                                 .attr("d", lineFunction(z83_data));
 
                                 z_83.attr("stroke-width", 2)
                                     .attr("stroke","black")
-
-                let perc = 1;
-                my_arr = [z_07,z_01,z_08,z_03,z_06,z_83]             
-                while (perc < 100) {
-                    setTimeout(function() {
-                        mapColors(my_arr, perc);
-                    },1000);
-                    perc++;
+                                    .attr("class","83");
+                
+                var my_arr = ["07","01","08","03","06","83"];
+                function changeColors(color) {
+                    my_arr.forEach(function(id) {
+                        svgCont.select("path[class='"+id+"']").style("fill",color);
+                    });
                 }
+
+                let perc = 99;
+                function startRender() {
+                    changeColors("hsl(330,50%,"+perc.toString()+"%)");
+                    perc--;
+
+                    if (perc > 30) {
+                        setTimeout(startRender,500)
+                    }
+                };
+
+                startRender();
             }
         </script>
     </head>
