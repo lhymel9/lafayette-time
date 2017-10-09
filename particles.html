@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8"/>
+        <script type="text/javascript" src="./node_modules/d3/build/d3.min.js"></script>
+        <script>
+            window.onload = function() {
+                const width = 700, height = 600;
+                const nodes = [{radius:5, category: 0}, {radius:5, category: 0}, {radius:5, category: 0}, {radius:5, category: 0}, {radius:5, category: 0}];
+
+                xCenter = [ 100, 200, 300, 400, 500 ];
+                yCenter = [ 100, 200, 300, 400, 500 ];
+
+                const simulation = d3.forceSimulation(nodes)
+                    .force('charge', d3.forceManyBody().strength(1))
+                    .force('x', d3.forceX().x(function(d) {
+                        return xCenter[d.category];
+                    }))
+                    .force('y', d3.forceY().y(function(d) {
+                        return yCenter[d.category];
+                    }))
+                    .force('collision', d3.forceCollide().radius(function(d) {
+                        return d.radius;
+                    }))
+                    .on('tick', ticked);
+                
+                function ticked() {
+                    let circles = d3.select('svg')
+                        .selectAll('circle')
+                        .data(nodes);
+                    
+                    circles.enter()
+                        .append('circle')
+                        .attr('r', function(d) {
+                            return d.radius;
+                        })
+                        .merge(circles)
+                        .attr('cx', function(d) {
+                            return d.x
+                        })
+                        .attr('cy', function(d) {
+                            return d.y
+                        });
+                    
+                    circles.exit().remove();
+                }
+
+                let spot = 0;
+                d3.interval(function() {
+                    if (spot < 6)
+                        spot++;
+                    else
+                        spot = 0;
+                    ticked();
+                }, 1000);
+            }
+        </script>
+    </head>
+    <body>
+        <svg width="1000" height="1000" viewBox="0 0 1000 1000"></svg>
+    </body>
+</html>
