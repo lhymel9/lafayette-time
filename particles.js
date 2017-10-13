@@ -8,26 +8,23 @@ function go() {
     }, function(data_arr) {
         const nodes = []
         let j = 0;
-        for(let i = 0; i < data_arr.length; i++) {
+        for(let i = 0; i < data_arr.length/2; i++) {
             let pop = parseInt(data_arr[i].population),
                 home = data_arr[i].start,
                 work = data_arr[i].end;
-
-            if (pop > 500) {
-                let extra = 0;
-                while (pop > 0) {
-                    nodes.push({id: j+extra, radius: 5, time:0, path: ["pre", home, work]})
-                    extra++;
-                    pop -= 500;
-                }
-                j = j + extra;
-            }
-            else {
-                if (pop != 0) {
-                    nodes.push({id: j, radius: 3, time: 0, path: ["pre", home, work]});
-                    j++;
-                }
-            }
+                console.log()
+                if (pop > 3500)
+                    nodes.push({id: i, radius: 16, time:0, path: [home, work]})
+                else if (pop > 1000)
+                    nodes.push({id: i, radius: 10, time:0, path: [home, work]})
+                else if (pop > 750)
+                    nodes.push({id: i, radius: 6, time:0, path: [home, work]})
+                else if (pop > 500)
+                    nodes.push({id: i, radius: 5, time:0, path: [home, work]})
+                else if (pop > 250)
+                    nodes.push({id: i, radius: 4, time:0, path: [home, work]})
+                else if (pop > 0)
+                    nodes.push({id: i, radius: 2, time:0, path: [home, work]})
         }
 
         const lineFunction = d3.line()
@@ -95,15 +92,30 @@ function go() {
             "70372": [1150, 880],
             "70339": [1025, 695],
             "70522": [ 675, 630],
-            "pre":   [1000, 150],
-            "other": [-50, -50],
-            "70342": [1020, 915],
-            "70392": [930, 915],
-            "70514": [ 650, 790],
+            "other": [ -50, -50],
+            "70342": [ 985, 940],
+            "70392": [ 930, 940],
+            "70514": [ 760, 800],
+            "70508": [ 420, 545],
+            "70523": [ 782, 782],
+            "70519": [ 515, 615],
+            "70541": [ 395, 325],
+            "70552": [ 675, 630],
+            "70524": [ 200, 205],
+            "70534": [ 100, 522],
+            "70537": [  15, 463],
+            "70554": [  90, 135],
+            "70556": [  15, 520],
+            "70576": [ 130,  22],
+            "70580": [ 127, 112],
+            "70585": [ 210,   0],
+            "71345": [ 445,  50],
+            "71356": [ 445,  30],
+            "71367": [ 240,   0],
         }
 
         const simulation = d3.forceSimulation(nodes)
-        .force('charge', d3.forceManyBody().strength(1))
+        .force('charge', d3.forceManyBody().strength(0))
         .force('x', d3.forceX().x(function(d) {
             console.log(coords[d.path[d.time]][0]);
             return coords[d.path[d.time]][0];
@@ -113,8 +125,9 @@ function go() {
             return coords[d.path[d.time]][1];
         }))
         .force('collision', d3.forceCollide().radius(function(d) {
-            return d.radius+5;
+            return d.radius+3;
         }))
+        .velocityDecay(.7)
         .alphaTarget(1)
         .on('tick', ticked);
 
@@ -155,10 +168,10 @@ function go() {
 
         function move() {
             nodes.forEach(function(n) {
-                if (n.time == 2)
+                if (n.time == 1)
                     n.time = 0;
                 else
-                    n.time++;
+                    n.time = 1;
             });
             node = node.data(nodes);
 
