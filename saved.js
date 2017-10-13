@@ -1,5 +1,6 @@
 function go() {
-    d3.csv('../lafayetteziplong.csv', function(data, idx) {
+    /*
+    d3.csv('lafayetteziplong.csv', function(data, idx) {
         return {
             start: data.livezip,
             end: data.workzip,
@@ -8,27 +9,30 @@ function go() {
     }, function(data_arr) {
         const nodes = []
         let j = 0;
-        for(let i = 0; i < data_arr.length; i++) {
+        for(let i = 11; i < 12; i++) {
             let pop = parseInt(data_arr[i].population),
                 home = data_arr[i].start,
                 work = data_arr[i].end;
 
-            if (pop > 500) {
+            if (pop > 100) {
                 let extra = 0;
                 while (pop > 0) {
-                    nodes.push({id: j+extra, radius: 5, time:0, path: ["pre", home, work]})
+                    nodes.push({id: j+extra, radius: 2, time:0, path: ["pre", home, work]})
                     extra++;
-                    pop -= 500;
+                    pop -= 100;
                 }
                 j = j + extra;
             }
             else {
                 if (pop != 0) {
-                    nodes.push({id: j, radius: 3, time: 0, path: ["pre", home, work]});
+                    nodes.push({id: j, radius: 2, time: 0, path: ["pre", home, work]});
                     j++;
                 }
             }
         }
+        */
+
+        nodes.push({id: 20, radius: 2, time: 0, path: ["pre", "71463", "70394"]});
 
         const lineFunction = d3.line()
             .x(function(d) {return d.x})
@@ -36,6 +40,7 @@ function go() {
             .curve(d3.curveLinear);
 
         const width = 1212, height = 968;
+        const nodes = [{id: 0, radius:3, time: 0, path: ["pre", "70560", "70528"]}];
 
         const coords = {
             "71463": [  40,  25],
@@ -113,7 +118,7 @@ function go() {
             return coords[d.path[d.time]][1];
         }))
         .force('collision', d3.forceCollide().radius(function(d) {
-            return d.radius+5;
+            return d.radius;
         }))
         .alphaTarget(1)
         .on('tick', ticked);
@@ -170,7 +175,7 @@ function go() {
 
         d3.interval(function() {
             move();
-        }, 6000, d3.now());
+        }, 2000, d3.now());
 
     });
 }
