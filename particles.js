@@ -12,19 +12,19 @@ function go() {
             let pop = parseInt(data_arr[i].population),
                 home = data_arr[i].start,
                 work = data_arr[i].end;
-                console.log()
+
                 if (pop > 3500)
-                    nodes.push({id: i, radius: 16, time:0, path: [home, work]})
+                    nodes.push({id: i, radius: 17, time:0, path: [home, work]})
                 else if (pop > 1000)
-                    nodes.push({id: i, radius: 10, time:0, path: [home, work]})
+                    nodes.push({id: i, radius: 11, time:0, path: [home, work]})
                 else if (pop > 750)
-                    nodes.push({id: i, radius: 6, time:0, path: [home, work]})
+                    nodes.push({id: i, radius: 7, time:0, path: [home, work]})
                 else if (pop > 500)
-                    nodes.push({id: i, radius: 5, time:0, path: [home, work]})
+                    nodes.push({id: i, radius: 6, time:0, path: [home, work]})
                 else if (pop > 250)
-                    nodes.push({id: i, radius: 4, time:0, path: [home, work]})
+                    nodes.push({id: i, radius: 5, time:0, path: [home, work]})
                 else if (pop > 0)
-                    nodes.push({id: i, radius: 2, time:0, path: [home, work]})
+                    nodes.push({id: i, radius: 3, time:0, path: [home, work]})
         }
 
         const lineFunction = d3.line()
@@ -38,7 +38,7 @@ function go() {
             "71463": [  40,  25],
             "70586": [ 210,  90],
             "71322": [ 380,  50],
-            "70544": [ 85,  130],
+            "70544": [ 675, 760],
             "70589": [ 395, 135],
             "70570": [ 365, 230],
             "70535": [ 130, 265],
@@ -53,7 +53,6 @@ function go() {
             "70394": [1120, 920],
             "70380": [1120, 925],
             "70341": [1100, 655],
-            "70544": [ 685, 760],
             "70560": [ 540, 725],
             "70592": [ 430, 605],
             "70577": [ 500, 210],
@@ -82,7 +81,6 @@ function go() {
             "70578": [ 235, 465],
             "70516": [ 210, 365],
             "70525": [ 280, 345],
-            "70544": [  85, 130],
             "70515": [  20, 305],
             "70543": [  65, 405],
             "70526": [ 160, 515],
@@ -114,20 +112,96 @@ function go() {
             "71367": [ 240,   0],
         }
 
+        const color_coords = {
+            "71463": "red",
+            "70586": "blue",
+            "71322": "DarkSlateGray",
+            "70544": "purple",
+            "70589": "green",
+            "70570": "Turquoise",
+            "70535": "SaddleBrown",
+            "70512": "red",
+            "70715": "blue",
+            "70520": "DarkSlateGray",
+            "70517": "purple",
+            "70582": "green",
+            "70767": "Turquoise",
+            "70788": "SaddleBrown",
+            "70390": "red",
+            "70394": "blue",
+            "70380": "DarkSlateGray",
+            "70341": "purple",
+            "70560": "Turquoise",
+            "70592": "SaddleBrown",
+            "70577": "red",
+            "70518": "blue",
+            "70563": "DarkSlateGray",
+            "70513": "purple",
+            "70528": "green",
+            "70533": "Turquoise",
+            "70538": "SaddleBrown",
+            "70510": "red",
+            "70548": "blue",
+            "70555": "DarkSlateGray",
+            "70588": "purple",
+            "70503": "green",
+            "70501": "Turquoise",
+            "70506": "SaddleBrown",
+            "70507": "purple",
+            "70584": "blue",
+            "70750": "DarkSlateGray",
+            "70571": "purple",
+            "71353": "green",
+            "71358": "Turquoise",
+            "71322": "SaddleBrown",
+            "70583": "red",
+            "70529": "blue",
+            "70578": "DarkSlateGray",
+            "70516": "purple",
+            "70525": "green",
+            "70515": "blue",
+            "70543": "red",
+            "70526": "blue",
+            "70559": "DarkSlateGray",
+            "70531": "purple",
+            "70542": "green",
+            "70372": "Turquoise",
+            "70339": "SaddleBrown",
+            "70522": "red",
+            "other": "blue",
+            "70342": "DarkSlateGray",
+            "70392": "purple",
+            "70514": "green",
+            "70508": "DarkSlateGray",
+            "70523": "SaddleBrown",
+            "70519": "red",
+            "70541": "green",
+            "70552": "DarkSlateGray",
+            "70524": "purple",
+            "70534": "green",
+            "70537": "Turquoise",
+            "70554": "SaddleBrown",
+            "70556": "red",
+            "70576": "red",
+            "70580": "DarkSlateGray",
+            "70585": "purple",
+            "71345": "green",
+            "71356": "Turquoise",
+            "71367": "SaddleBrown",
+        }
+
         const simulation = d3.forceSimulation(nodes)
         .force('charge', d3.forceManyBody().strength(0))
         .force('x', d3.forceX().x(function(d) {
-            console.log(coords[d.path[d.time]][0]);
             return coords[d.path[d.time]][0];
         }))
         .force('y', d3.forceY().y(function(d) {
-            console.log(coords[d.path[d.time]][1])
             return coords[d.path[d.time]][1];
         }))
         .force('collision', d3.forceCollide().radius(function(d) {
             return d.radius+3;
         }))
-        .velocityDecay(.7)
+        .velocityDecay(.75)
         .alphaTarget(1)
         .on('tick', ticked);
 
@@ -148,7 +222,8 @@ function go() {
         function ticked() {
             let circles = d3.select('svg')
                 .selectAll('circle')
-                .data(nodes);
+                .data(nodes)
+                .style("fill", function(d) { return color_coords[d.path[d.time]]})
 
             circles.enter()
                 .append('circle')
@@ -173,7 +248,7 @@ function go() {
                 else
                     n.time = 1;
             });
-            node = node.data(nodes);
+            node = node.data(nodes).style("fill",function(d) {return color_coords[d.path[d.time]]});;
 
             node.exit()
                 .remove();

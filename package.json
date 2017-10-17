@@ -1,0 +1,7 @@
+{
+  "name": "lafayette-time",
+  "version": "1.0.0",
+  "dependencies": {
+    "d3": "^4.11.0"
+  }
+}
