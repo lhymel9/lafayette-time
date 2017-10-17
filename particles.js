@@ -117,10 +117,10 @@ function go() {
             "70586": "blue",
             "71322": "DarkSlateGray",
             "70544": "purple",
-            "70589": "green",
+            "70589": "black",
             "70570": "Turquoise",
-            "70535": "SaddleBrown",
-            "70512": "red",
+            "70535": "white",
+            "70512": "white",
             "70715": "blue",
             "70520": "DarkSlateGray",
             "70517": "purple",
@@ -138,8 +138,8 @@ function go() {
             "70563": "DarkSlateGray",
             "70513": "purple",
             "70528": "green",
-            "70533": "Turquoise",
-            "70538": "SaddleBrown",
+            "70533": "black",
+            "70538": "white",
             "70510": "red",
             "70548": "blue",
             "70555": "DarkSlateGray",
@@ -151,7 +151,7 @@ function go() {
             "70584": "blue",
             "70750": "DarkSlateGray",
             "70571": "purple",
-            "71353": "green",
+            "71353": "black",
             "71358": "Turquoise",
             "71322": "SaddleBrown",
             "70583": "red",
@@ -163,29 +163,29 @@ function go() {
             "70543": "red",
             "70526": "blue",
             "70559": "DarkSlateGray",
-            "70531": "purple",
-            "70542": "green",
+            "70531": "white",
+            "70542": "#ff1493",
             "70372": "Turquoise",
             "70339": "SaddleBrown",
             "70522": "red",
             "other": "blue",
-            "70342": "DarkSlateGray",
+            "70342": "white",
             "70392": "purple",
             "70514": "green",
-            "70508": "DarkSlateGray",
-            "70523": "SaddleBrown",
+            "70508": "black",
+            "70523": "black",
             "70519": "red",
-            "70541": "green",
-            "70552": "DarkSlateGray",
+            "70541": "red",
+            "70552": "purple",
             "70524": "purple",
             "70534": "green",
-            "70537": "Turquoise",
-            "70554": "SaddleBrown",
+            "70537": "black",
+            "70554": "black",
             "70556": "red",
             "70576": "red",
             "70580": "DarkSlateGray",
             "70585": "purple",
-            "71345": "green",
+            "71345": "blue",
             "71356": "Turquoise",
             "71367": "SaddleBrown",
         }
@@ -199,7 +199,7 @@ function go() {
             return coords[d.path[d.time]][1];
         }))
         .force('collision', d3.forceCollide().radius(function(d) {
-            return d.radius+3;
+            return d.radius+2;
         }))
         .velocityDecay(.75)
         .alphaTarget(1)
@@ -224,6 +224,8 @@ function go() {
                 .selectAll('circle')
                 .data(nodes)
                 .style("fill", function(d) { return color_coords[d.path[d.time]]})
+                .style("stroke-width", 2)
+                .style("stroke", "black")
 
             circles.enter()
                 .append('circle')
@@ -258,7 +260,7 @@ function go() {
 
         d3.interval(function() {
             move();
-        }, 6000, d3.now());
+        }, 7900, d3.now());
 
     });
 }
