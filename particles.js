@@ -90,7 +90,7 @@ function go() {
             "70372": [1150, 880],
             "70339": [1025, 695],
             "70522": [ 675, 630],
-            "other": [1212, -100],
+            "other": [1350, 484],
             "70342": [ 985, 940],
             "70392": [ 930, 940],
             "70514": [ 760, 800],
@@ -199,7 +199,7 @@ function go() {
             return coords[d.path[d.time]][1];
         }))
         .force('collision', d3.forceCollide().radius(function(d) {
-            return d.radius+2;
+            return d.radius+1;
         }))
         .velocityDecay(.75)
         .alphaTarget(1)
@@ -265,7 +265,7 @@ function go() {
 
         d3.interval(function() {
             move();
-        }, 8600, d3.now());
+        }, 10000, d3.now());
 
     });
 }
