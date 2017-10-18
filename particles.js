@@ -8,7 +8,7 @@ function go() {
     }, function(data_arr) {
         const nodes = []
         let j = 0;
-        for(let i = 0; i < data_arr.length/2; i++) {
+        for(let i = 0; i < data_arr.length; i++) {
             let pop = parseInt(data_arr[i].population),
                 home = data_arr[i].start,
                 work = data_arr[i].end;
@@ -90,7 +90,7 @@ function go() {
             "70372": [1150, 880],
             "70339": [1025, 695],
             "70522": [ 675, 630],
-            "other": [ -50, -50],
+            "other": [1212, -100],
             "70342": [ 985, 940],
             "70392": [ 930, 940],
             "70514": [ 760, 800],
@@ -211,19 +211,21 @@ function go() {
                 .append("image")
                     .attr("xlink:href", "map3.png")
 
-        g = svg.append("g")
-            .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")"),
+            g = svg.append("g")
+                .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")"),
 
-        node = g.append("g")
-            .attr("stroke", "#fff")
-            .attr("stroke-width", 1.5)
-                .selectAll(".node");
+            node = g.append("g")
+                .attr("stroke", "#fff")
+                .attr("stroke-width", 1.5)
+                    .selectAll(".node");
 
         function ticked() {
             let circles = d3.select('svg')
                 .selectAll('circle')
                 .data(nodes)
-                .style("fill", function(d) { return color_coords[d.path[d.time]]})
+                .style("fill", function(d) { 
+                    return color_coords[d.path[d.time]]
+                })
                 .style("stroke-width", 2)
                 .style("stroke", "black")
 
@@ -250,7 +252,10 @@ function go() {
                 else
                     n.time = 1;
             });
-            node = node.data(nodes).style("fill",function(d) {return color_coords[d.path[d.time]]});;
+            node = node.data(nodes)
+                    .style("fill", function(d) { 
+                        return color_coords[d.path[d.time]] 
+                    });
 
             node.exit()
                 .remove();
@@ -260,7 +265,7 @@ function go() {
 
         d3.interval(function() {
             move();
-        }, 7900, d3.now());
+        }, 8600, d3.now());
 
     });
 }
