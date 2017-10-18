@@ -90,7 +90,7 @@ function go() {
             "70372": [1150, 880],
             "70339": [1025, 695],
             "70522": [ 675, 630],
-            "other": [1350, 484],
+            "other": [-100, -100],
             "70342": [ 985, 940],
             "70392": [ 930, 940],
             "70514": [ 760, 800],
@@ -190,6 +190,8 @@ function go() {
             "71367": "SaddleBrown",
         }
 
+        let otheringConstant = 0;
+
         const simulation = d3.forceSimulation(nodes)
         .force('charge', d3.forceManyBody().strength(0))
         .force('x', d3.forceX().x(function(d) {
@@ -201,7 +203,7 @@ function go() {
         .force('collision', d3.forceCollide().radius(function(d) {
             return d.radius+1;
         }))
-        .velocityDecay(.75)
+        .velocityDecay(.7)
         .alphaTarget(1)
         .on('tick', ticked);
 
