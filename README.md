@@ -2,4 +2,4 @@
 Zip code time-movement visualization for Lafayette, LA.
 
 
-[![laf-time.gif](https://gifyu.com/images/laf-time.gif)](https://gifyu.com/image/MVM2)
+[![Latest Project GIF](https://gifyu.com/images/laf-time-color.gif)](https://gifyu.com/image/MZyQ)
