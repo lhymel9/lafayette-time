@@ -101,7 +101,14 @@ const coords = {
     "70372": [1165, 865],
     "70339": [1040, 680],
     "70522": [ 690, 615],
-    "other": [-100, -100],
+    "O1":    [100, -100],
+    "O2":    [1050, 275],
+    "O3":    [1100, 275],
+    "O4":    [1100, 315],
+    "O5":    [1315, 800],
+    "O6":    [-100, 594],
+    "O7":    [-100, 263],
+    "O8":    [1115, -100],
     "70342": [1000, 925],
     "70392": [ 945, 925],
     "70514": [ 775, 785],
@@ -201,6 +208,7 @@ const color_coords = {
     "71367": "SaddleBrown",
 }
 
+
 function go() {
     d3.csv('./by1000.csv', function(data, idx) {
         return {
@@ -210,14 +218,37 @@ function go() {
         }
     }, function(data_arr) {
         const nodes = []
-        let j = 0;
+        let otherCount = 1;
         for(let i = 0; i < data_arr.length; i++) {
             let pop = parseInt(data_arr[i].population),
                 home = data_arr[i].start,
                 work = data_arr[i].end;
 
-                if (pop > 0)
-                    nodes.push({id: i, radius: 3, time:0, path: [home, work]})
+                if (pop > 399)
+                    if (work == "other") {
+                        let newWork = "O1";
+                        if (otherCount > 50)
+                            newWork = "O1";
+                        else if (otherCount > 45)
+                            newWork = "O2";
+                        else if (otherCount > 35)
+                            newWork = "O3";
+                        else if (otherCount > 30)
+                            newWork = "O4";
+                        else if (otherCount > 25)
+                            newWork = "O5";
+                        else if (otherCount > 10)
+                            newWork = "O6";
+                        else if (otherCount > 5)
+                            newWork = "O7"
+                        else if (otherCount > 0)
+                            newWork = "O8";
+
+                        nodes.push({id: i, radius:4, time: 0, path: [home, newWork]});
+                        otherCount++;
+                    }
+                    else
+                        nodes.push({id: i, radius: 4, time:0, path: [home, work]});
         }
 
         const lineFunction = d3.line()
@@ -240,9 +271,9 @@ function go() {
                 return coords[d.path[d.time]][1];
             }))
             .force('collision', d3.forceCollide().radius(function(d) {
-                return d.radius+3;
+                return d.radius+5;
             }))
-            .velocityDecay(.7)
+            .velocityDecay(.9)
             .alphaTarget(1)
             .on('tick', ticked);
 
@@ -304,10 +335,10 @@ function go() {
                 })
                 .merge(circles)
                 .attr('cx', function(d) {
-                    return d.x
+                    return d.x;
                 })
                 .attr('cy', function(d) {
-                    return d.y
+                    return d.y;
                 });
 
             circles
@@ -332,7 +363,7 @@ function go() {
 
         d3.interval(function() {
             move();
-        }, 10000, d3.now());
+        }, 9000, d3.now());
 
     });
 }
