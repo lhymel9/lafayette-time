@@ -1,0 +1,33 @@
+<html>
+    <head>
+        <meta charset="UTF-8"/>
+        <script>
+            window.addEventListener('load', function(){
+                var svg = document.getElementById("s");
+                    svg.addEventListener('click', function (e) {
+                        this.style.position = "absolute";
+                        var x = e.clientX,
+                            y = e.clientY,
+                            svgP = svgPoint(svg, x, y),
+                            svgL = svgPoint(svg, x, y);
+                        document.getElementById("h").innerHTML = Math.round(svgP.x) + "," + Math.round(svgP.y);
+                    }, false);
+                    
+                function svgPoint(element, x, y) {
+                    var pt = svg.createSVGPoint();
+                    pt.x = x;
+                    pt.y = y;
+
+                    return pt.matrixTransform(element.getScreenCTM().inverse());
+                }
+            });
+
+        </script>
+    </head>
+
+    <body>
+        <svg id="s" width="1258" height="858" style="position: relative; background: url('../bayou-region/bayou-region.png') no-repeat;">
+        </svg>
+        <h1 id="h" style="position: absolute">Blank</h1>
+    </body>
+</html>

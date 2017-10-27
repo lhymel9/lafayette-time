@@ -282,17 +282,17 @@ function go() {
             .attr("height", height);
                 
             svg.append("image")
-                .attr("xlink:href", "map4.png")
+                .attr("xlink:href", "acadiana-region.png")
 
             svg.append("image")
-                .attr("xlink:href", "I-10.png")
+                .attr("xlink:href", "../I-10.png")
                 .attr("x", "870")
                 .attr("y", "310")
                 .attr("width", "50")
                 .attr("heigh", "70")
 
             svg.append("image")
-                .attr("xlink:href", "I-49.png")
+                .attr("xlink:href", "../I-49.png")
                 .attr("x", "320")
                 .attr("y", "70")
                 .attr("width", "50")
